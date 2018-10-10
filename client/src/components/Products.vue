@@ -45,7 +45,7 @@
 <script>
 import ProductService from '@/services/ProductService'
 export default {
-  name: 'products',
+  name: 'Products',
   data () {
     return {
       products: [],

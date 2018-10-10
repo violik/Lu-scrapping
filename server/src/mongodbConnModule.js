@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+// basic Mongo config
 module.exports.connect = function() {
 	mongoose.connect('mongodb://localhost:27017/lu-scrapping');
 	var db = mongoose.connection;

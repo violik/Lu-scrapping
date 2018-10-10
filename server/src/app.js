@@ -11,7 +11,6 @@ app.use(cors())
 const mongodb_conn_module = require('./mongodbConnModule');
 var db = mongodb_conn_module.connect();
 
-var Post = require("../models/post");
 var Product = require("../models/product");
 const Scrapper = require('../scrapper/scrapper');
 
@@ -20,6 +19,7 @@ async function test(){
 		await Scrapper.scrap();
 	} catch(err) {}
 }
+//API: Get /products => sort all products in database
 app.get('/products', (req, res) => {
   	test();
    	setTimeout(function(){
@@ -31,6 +31,7 @@ app.get('/products', (req, res) => {
 	}).sort({_id:-1})
    	}, 4500);
 })
+//API: Delete /products => delete all products in database
 
 app.delete('/products', (req, res) => {
 	Product.collection.remove({}, function(err, post){

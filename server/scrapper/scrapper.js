@@ -18,17 +18,13 @@ var options = {
 rp(options)
     .then(function (htmlString) {
         // Process html...
-        console.log("hey you !");
         var $ = cheerio.load(htmlString);
 		var allItems_bestSelling = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children();
 		var items_bestSelling = [];
 		
 		allItems_bestSelling.each(function(index1) {
-			
+			// get BestSelling products details page links
 			let tmp = {};
-			/*tmp.brand = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children().eq(index1).find('h3.productBrandTitle').text();
-			tmp.product = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children().eq(index1).find('p.productTitle').text();
-			tmp.img = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children().eq(index1).find('img').attr("src");*/
 			tmp.url = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children().eq(index1).find('a').attr("href");
 
 			var optionsBest = {
@@ -41,16 +37,18 @@ rp(options)
     		        'Accept-Language': 'en-US,en;q=0.8'
     		    }
     		};
+    		// load details page html
     		rp(optionsBest)
     			.then(function (htmlStringBest) {
 					var $ = cheerio.load(htmlStringBest);
+					// sort revelant informations
 						tmp.brand = $(".productHeaderContainer").children().eq(0).find('.productBrandTitle').text();
 						tmp.title = $(".productHeaderContainer").children().eq(0).find('.productTitle').text();
 						tmp.price = $(".productHeaderContainer").children().eq(0).find('.productPrice').text() + $(".productHeaderContainer").children().eq(0).find('.productCurrency').text();
 						tmp.picture = $(".productDataContainer").children().eq(0).find('img').attr("src");
 						tmp.description = $(".productInfo").children().eq(0).children().eq(1).find('p').text();
 						tmp.ingredientList = $(".productInfo").children().eq(0).children().eq(3).find('p').text();
-
+					// create object in database
 						var new_product = new Product({
 							title: tmp.title,
 							description: tmp.description,
@@ -67,7 +65,6 @@ rp(options)
 							}
 							
 						})
-						//console.log("hey:", tmp);
 				})
 			 	.catch(function (err) {
     		   		// Crawling failed...
@@ -79,16 +76,13 @@ rp(options)
 		});
 
 
-
+		// Process html...
 		var allItems_trending = $(".trending").children().eq(0).children().eq(1).children().eq(0).children();
 		var items_trending = [];
 		
 		allItems_trending.each(function(index2) {
-			
+			// get Trend products details page links
 			let tmp = {};
-			/*tmp.brand = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children().eq(index1).find('h3.productBrandTitle').text();
-			tmp.product = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children().eq(index1).find('p.productTitle').text();
-			tmp.img = $(".bestselling").children().eq(0).children().eq(1).children().eq(0).children().eq(index1).find('img').attr("src");*/
 			tmp.url = $(".trending").children().eq(0).children().eq(1).children().eq(0).children().eq(index2).find('a').attr("href");
 
 			var optionsTrend = {
@@ -101,16 +95,18 @@ rp(options)
     		        'Accept-Language': 'en-US,en;q=0.8'
     		    }
     		};
+    		// load details page html
     		rp(optionsTrend)
     			.then(function (htmlStringTrend) {
 					var $ = cheerio.load(htmlStringTrend);
+					// sort revelant informations
 						tmp.brand = $(".productHeaderContainer").children().eq(0).find('.productBrandTitle').text();
 						tmp.title = $(".productHeaderContainer").children().eq(0).find('.productTitle').text();
 						tmp.price = $(".productHeaderContainer").children().eq(0).find('.productPrice').text() + $(".productHeaderContainer").children().eq(0).find('.productCurrency').text();
 						tmp.picture = $(".productDataContainer").children().eq(0).find('img').attr("src");
 						tmp.description = $(".productInfo").children().eq(0).children().eq(1).find('p').text();
 						tmp.ingredientList = $(".productInfo").children().eq(0).children().eq(3).find('p').text();
-
+					// create object in database
 						var new_product = new Product({
 							title: tmp.title,
 							description: tmp.description,
