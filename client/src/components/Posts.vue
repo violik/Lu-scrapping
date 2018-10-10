@@ -5,7 +5,14 @@
     <h2><button @click="deleteall()">Delete</button></h2>
     <div v-if="products.length > 0" class="table-wrap">
       <div>
-      <h2><button @click="deleteall()">Export to csv</button></h2>
+        <h2><button>
+        <download-csv
+          class   = "btn btn-default"
+          :data   = "products"
+          separator-excel = "true"
+          name    = "Products.csv">
+          Export to csv
+        </download-csv></button></h2>
       </div>
       <table>
         <tr>
