@@ -57,7 +57,8 @@ rp(options)
 							brand: tmp.brand,
 							price: tmp.price,
 							picture: tmp.picture,
-							ingredientList: tmp.ingredientList
+							ingredientList: tmp.ingredientList,
+							type: 'best'
 						})
 					
 						new_product.save(function (error) {
@@ -116,7 +117,8 @@ rp(options)
 							brand: tmp.brand,
 							price: tmp.price,
 							picture: tmp.picture,
-							ingredientList: tmp.ingredientList
+							ingredientList: tmp.ingredientList,
+							type: 'trend'
 						})
 					
 						new_product.save(function (error) {
