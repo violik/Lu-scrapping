@@ -9,3 +9,4 @@ Required at least:
 Starting the project:
 - Start mongo:  tape 'mongod' in a terminal
 - Start Client: cd client, npm install, npm run dev
+- Start Server: cd server, npm install, npm start
